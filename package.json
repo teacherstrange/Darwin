@@ -8,7 +8,7 @@
   "scripts": {
     "db:seed": "prisma db seed --preview-feature",
     "db:migrate": "prisma migrate dev --name init",
-    "db:studio": "npx prisma studio",
+    "db:studio": "npx prisma studio"
   },
   "dependencies": {
     "@prisma/client": "^2.28.0",
