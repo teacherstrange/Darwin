@@ -1,0 +1,29 @@
+{
+  "entryFile": "./src/index.ts",
+  "noImplicitAdditionalProperties": "silently-remove-extras",
+  "controllerPathGlobs": [
+    "./src/lib/**/*.controller.ts"
+  ],
+  "spec": {
+    "basePath": "api",
+    "specVersion": 3,
+    "host": null,
+    "outputDirectory": "./routes",
+    "securityDefinitions": {
+      "Bearer": {
+        "type": "apiKey",
+        "name": "token",
+        "in": "header",
+        "scopes" : {
+          "root" : "can do",
+          "admin" : "can do",
+          "user" : "can do"
+        }
+      }
+    }
+  },
+  "routes": {
+    "basePath": "",
+    "routesDir": "./routes"
+  }
+}
