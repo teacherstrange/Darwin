@@ -3,7 +3,7 @@ const prisma = new PrismaClient();
 
 const main = async () => {
   /**
-  const ben = await prisma.user.create({
+  const ben = await prisma.ts.user.create({
     data: {
       username: "Ben wolf",
       email: "ben@wolf.com",
@@ -11,7 +11,7 @@ const main = async () => {
   },
   });
 
-  const lucy = await prisma.user.create({
+  const lucy = await prisma.ts.user.create({
     data: {
       username: "Lucy Snow",
       email: "lucy@snow.com",
