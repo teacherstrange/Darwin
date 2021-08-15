@@ -1,6 +1,6 @@
 import {Context} from "../../utils/generic/context";
 import {DateTimeResolver} from "graphql-scalars";
-import authResolvers from "./../controllers/auth/auth.resolver";
+import authResolvers from "../modules/auth/auth.resolver";
 export default {
     Query: {
         ...authResolvers.query

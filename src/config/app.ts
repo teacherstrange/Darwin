@@ -15,7 +15,7 @@ import {Controller} from '../utils/generic/controller';
 import {ErrorMiddleware} from '../utils/generic/error.middleware';
 
 //Inclusions of all Routes
-import {allRoutes} from '../../routes';
+import {allRoutes} from '../routes';
 declare var global: any;
 
 //Response builder

@@ -24,6 +24,8 @@
   },
   "routes": {
     "basePath": "",
-    "routesDir": "./routes"
+    "routesDir": "./src/routes",
+    "middleware": "express",
+    "authenticationModule": "./src/lib/modules/auth/middlewares/auth"
   }
 }
