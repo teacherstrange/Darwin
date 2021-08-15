@@ -8,74 +8,96 @@ datasource db {
 }
 
 model User {
-  uuid          String  @id @default(uuid())
-  email         String  @unique
-  password      String
-  username      String
-  company       String?
-  role          String?
-  projects      Project[]
-  posts         Post[]
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  id      String     @id @default(uuid())
+  email     String     @unique
+  password  String
+  username  String
+  company   String?
+  role      String?
+  verifiedAt DateTime?
+  projects  Project[]
+  posts     Post[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  JWTToken  JWTToken[]
+}
+
+model JWTToken {
+  userId     String
+  token      String  @id
+  expiredAt  DateTime
+  used       Boolean? @default(false)
+  destroyed  Boolean? @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  user       User     @relation(fields: [userId], references: [id])
+}
+
+model ForgetPassword {
+  token      String   @id @default(uuid())
+  email      String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  expiredAt DateTime
 }
 
 model Project {
-  uuid          String  @id @default(uuid())
-  short_url     String  @unique
-  name          String
-  userId        String
-  description   String?
-  categories    Category[]
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-  user          User @relation(fields: [userId], references: [uuid])
+  id        String     @id @default(uuid())
+  shortUrl   String     @unique
+  name        String
+  userId      String
+  description String?
+  categories  Category[]
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  user        User       @relation(fields: [userId], references: [id])
 
 }
 
 model Category {
-  uuid          String  @id @default(uuid())
-  slug          String  @unique
-  name          String
-  projectId          String
-  description   String?
-  cover         String?
-  posts         Post[]
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-  project       Project @relation(fields: [projectId], references: [uuid])
+  id        String   @id @default(uuid())
+  slug        String   @unique
+  name        String
+  projectId   String
+  description String?
+  cover       String?
+  posts       Post[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  project     Project  @relation(fields: [projectId], references: [id])
 }
+
 enum State {
   PUBLISHED
   DRAFT
   ARCHIVED
 }
+
 model Post {
-  uuid          String  @id @default(uuid())
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-  title         String
-  slug          String  @unique
-  content       String
-  cover         String?
-  state         State  @default(DRAFT)
-  comments      Comment[]
+  id      String    @id @default(uuid())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  title     String
+  slug      String    @unique
+  content   String
+  cover     String?
+  state     State     @default(DRAFT)
+  comments  Comment[]
 
   // relation field
-  authorId      String?
-  categoryId    String
-  author        User?    @relation(fields: [authorId], references: [uuid])
-  category      Category @relation(fields: [categoryId], references: [uuid])
+  authorId   String?
+  categoryId String
+  author     User?    @relation(fields: [authorId], references: [id])
+  category   Category @relation(fields: [categoryId], references: [id])
 }
 
-
 model Comment {
-  uuid          String  @id @default(uuid())
-  name          String
-  postId        String
-  message       String
-  email         String?
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-  post          Post @relation(fields: [postId], references: [uuid])
+  id      String   @id @default(uuid())
+  name      String
+  postId    String
+  message   String
+  email     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  post      Post     @relation(fields: [postId], references: [id])
 }

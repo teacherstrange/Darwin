@@ -1,0 +1,100 @@
+
+input LoginInput {
+  username: String!
+  password: String!
+}
+
+input RefreshTokenInput {
+  refresh_token: String
+}
+
+# type User {
+#     id: ID!
+#     name: String!
+#     email: String!
+# }
+
+type AuthPayload {
+  access_token: String
+  refresh_token: String
+  expires_in: Int
+  token_type: String
+  user: User
+}
+
+type RefreshTokenPayload {
+  access_token: String!
+  refresh_token: String!
+  expires_in: Int!
+  token_type: String!
+}
+
+type LogoutResponse {
+  status: String!
+  message: String
+}
+
+type ForgotPasswordResponse {
+  status: String!
+  message: String
+}
+
+type RegisterResponse {
+  tokens: AuthPayload
+  status: RegisterStatuses!
+}
+
+type UpdatePasswordResponse {
+  status: String!
+  message: String
+}
+
+enum RegisterStatuses {
+  MUST_VERIFY_EMAIL
+  SUCCESS
+}
+
+input ForgotPasswordInput {
+  email: String! @constraint(minLength: 5, format: "email")
+}
+
+input NewPasswordWithCodeInput {
+  email: String!  @constraint(minLength: 5, format: "email")
+  token: String!  @constraint(minLength: 1)
+  password: String!  @constraint(minLength: 5, pattern: "^[0-9a-zA-Z]*$")
+  password_confirmation: String!
+}
+
+input RegisterInput {
+  name: String! @constraint(minLength: 3)
+  email: String! @constraint(minLength: 5, format: "email")
+  password: String!
+  password_confirmation: String!
+}
+
+input SocialLoginInput {
+  provider: String!
+  token: String!
+}
+
+input VerifyEmailInput {
+  token: String!
+}
+
+input UpdatePassword {
+  old_password: String!
+  password: String!
+  password_confirmation: String!
+}
+
+extend type Mutation {
+  login(input: LoginInput): AuthPayload!
+  refreshToken(input: RefreshTokenInput ) : RefreshTokenPayload!
+  logout: LogoutResponse!
+  forgotPassword(input: ForgotPasswordInput!) : ForgotPasswordResponse!
+  updateForgottenPassword(input: NewPasswordWithCodeInput): ForgotPasswordResponse!
+  register(input: RegisterInput): RegisterResponse!
+  socialLogin(input: SocialLoginInput!): AuthPayload!
+  verifyEmail(input: VerifyEmailInput!): AuthPayload!
+  updatePassword(input: UpdatePassword!): UpdatePasswordResponse!
+}

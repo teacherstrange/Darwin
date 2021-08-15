@@ -28,7 +28,7 @@ dotenv.config();
 
 export const app: Express = express();
 
-export const appyMiddlewares = (app : Express) => {
+export const applyMiddlewares = (app : Express) => {
 
 //Debugger --dev
     app.use(morgan('dev'));

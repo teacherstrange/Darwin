@@ -1,4 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
+var nodeExternals = require('webpack-node-externals');
 
 module.exports = (env) => {
   /* eslint-disable @typescript-eslint/no-var-requires */
@@ -22,7 +23,7 @@ module.exports = (env) => {
         {
           test: /\.tsx?$/,
           use: 'ts-loader',
-          exclude: [/node_modules/],
+          exclude: /node_modules/,
         },
         {
             test: /\.(graphql|gql)$/,
@@ -34,11 +35,12 @@ module.exports = (env) => {
     resolve: {
       extensions: ['.js', '.ts'],
     },
-    externals: nodeModules,
+    externals: [nodeExternals()],
     output: {
       filename: 'index.js',
       path: path.join(__dirname, 'build'),
     },
+
     plugins: [
       // fix for moment bundle size issues on include locale
     ],

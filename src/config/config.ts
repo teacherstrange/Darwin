@@ -14,5 +14,7 @@ export default {
     S3_ACCESS_KEY: process.env.S3_ACCESS_KEY ?? '',
     S3_REGION: process.env.S3_REGION ?? '',
     S3_BUCKET: process.env.S3_BUCKET ?? '',
+    SALT: parseInt(process.env.SALT ?? '5'),
+    JWT_SECRET: process.env.JWT_SECRET ?? "",
     APP_PORT: process.env.APP_PORT ?? 3000
 }
