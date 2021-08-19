@@ -1,5 +1,4 @@
 import http from 'http';
-import portfinder from 'portfinder';
 import {app, applyMiddlewares} from "./app"
 import graphqlServer from "./graphql";
 declare var global: any;
@@ -9,11 +8,9 @@ export default async () => {
     await graphqlServer(app);
     //Catch request in case of not found url
     applyMiddlewares(app)
-    const availablePort : number = await portfinder.getPortPromise({
-        port : <number> parseInt(process.env.PORT ?? "3000"),
-        startPort : 3000,
-        stopPort : 5999
-    });
+    const availablePort = process.env.PORT
+
+
 
     app.set('port', availablePort);
 
