@@ -10,7 +10,7 @@ export default async () => {
     //Catch request in case of not found url
     applyMiddlewares(app)
     const availablePort : number = await portfinder.getPortPromise({
-        port : <number> parseInt(process.env.APP_PORT ?? "3000"),
+        port : <number> parseInt(process.env.PORT ?? "3000"),
         startPort : 3000,
         stopPort : 5999
     });

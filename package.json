@@ -10,6 +10,7 @@
     "db:migrate": "prisma migrate dev --name init",
     "db:studio": "npx prisma studio",
     "start": "concurrently \"yarn run tsoa:watch\" \"yarn run bundle:watch\" \"yarn run run:watch\"",
+    "start:dev": "concurrently \"yarn run tsoa:watch\" \"yarn run bundle:watch\" \"yarn run run:watch\"",
     "dep:check": "node bin/checkDep.js",
     "run": "node build/index.js",
     "run:watch": "nodemon --watch build --delay 2000ms build/index.js",

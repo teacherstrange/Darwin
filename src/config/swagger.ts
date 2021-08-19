@@ -7,8 +7,8 @@ const router:Router = express.Router();
 const swaggerDoc = (req:any, res:any, next: () => any) => {
     if (swaggerSchema.servers.length === 1) {
         swaggerSchema.servers = [
-            { url: `${process.env.APP_DOMAIN}:${process.env.APP_PORT}` },
-            { url: `${process.env.APP_DOMAIN}:${process.env.APP_PORT}` },
+            { url: `${process.env.APP_DOMAIN}:${process.env.PORT}` },
+            { url: `${process.env.APP_DOMAIN}:${process.env.PORT}` },
         ];
 
         if (process.env.REVERSE_PROXY) {
