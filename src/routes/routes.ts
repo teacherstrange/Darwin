@@ -12,8 +12,6 @@ import { profileController } from './../lib/modules/auth/controllers/profile.con
 import { authController } from './../lib/modules/auth/controllers/register.controller';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { verifyController } from './../lib/modules/auth/controllers/verify.controller';
-// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-import { indexController } from './../lib/modules/sample.controller';
 import { expressAuthentication } from './../lib/modules/auth/middlewares/auth';
 // @ts-ignore - no great way to install types from subpackage
 const promiseAny = require('promise.any');
@@ -397,29 +395,6 @@ export function RegisterRoutes(app: express.Router) {
 
 
             const promise = controller.verify.apply(controller, validatedArgs as any);
-            promiseHandler(controller, promise, response, undefined, next);
-        });
-        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.post('/index/supercontroller',
-
-            function indexController_sample(request: any, response: any, next: any) {
-            const args = {
-                    body: {"in":"body","name":"body","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"description":{"dataType":"string"},"name":{"dataType":"string","required":true}}},
-            };
-
-            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = getValidatedArgs(args, request, response);
-            } catch (err) {
-                return next(err);
-            }
-
-            const controller = new indexController();
-
-
-            const promise = controller.sample.apply(controller, validatedArgs as any);
             promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa

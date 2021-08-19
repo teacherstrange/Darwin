@@ -1,105 +1,642 @@
 {
-  "components": {
-    "examples": {},
-    "headers": {},
-    "parameters": {},
-    "requestBodies": {},
-    "responses": {},
-    "schemas": {
-      "IResponse": {
-        "properties": {
-          "code": {
-            "type": "number",
-            "format": "double",
-            "description": "This is the code of response you consult the code list for known what this code meaning"
-          },
-          "data": {
-            "description": "This is the data (Optionnal)"
-          },
-          "message": {
-            "type": "string",
-            "description": "This is the message of the request (Optionnal)"
-          },
-          "token": {
-            "type": "string",
-            "description": "This is the token givin on login (Optionnal)"
-          }
-        },
-        "required": [
-          "code",
-          "data"
-        ],
-        "type": "object",
-        "additionalProperties": false
-      }
-    },
-    "securitySchemes": {
-      "Bearer": {
-        "type": "apiKey",
-        "name": "token",
-        "in": "header",
-        "scopes": {
-          "root": "can do",
-          "admin": "can do",
-          "user": "can do"
-        }
-      }
-    }
-  },
-  "info": {
-    "title": "darwin",
-    "version": "1.0.0",
-    "license": {
-      "name": "MIT"
-    },
-    "contact": {}
-  },
-  "openapi": "3.0.0",
-  "paths": {
-    "/index/supercontroller": {
-      "post": {
-        "operationId": "Sample",
-        "responses": {
-          "200": {
-            "description": "Ok",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/IResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [],
-        "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "properties": {
-                  "description": {
-                    "type": "string"
-                  },
-                  "name": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "name"
-                ],
-                "type": "object"
-              }
-            }
-          }
-        }
-      }
-    }
-  },
-  "servers": [
-    {
-      "url": "/api"
-    }
-  ]
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+			"IResponse": {
+				"properties": {
+					"code": {
+						"type": "number",
+						"format": "double",
+						"description": "This is the code of response you consult the code list for known what this code meaning"
+					},
+					"data": {
+						"description": "This is the data (Optionnal)"
+					},
+					"message": {
+						"type": "string",
+						"description": "This is the message of the request (Optionnal)"
+					},
+					"token": {
+						"type": "string",
+						"description": "This is the token givin on login (Optionnal)"
+					}
+				},
+				"required": [
+					"code",
+					"data"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Email": {
+				"type": "string",
+				"example": "john-deo@example.com",
+				"description": "Email input. Currently regex does not work due to bug in jsDoc"
+			},
+			"forgotPasswordParams": {
+				"properties": {
+					"email": {
+						"$ref": "#/components/schemas/Email"
+					}
+				},
+				"required": [
+					"email"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ResetPasswordParams": {
+				"properties": {
+					"token": {
+						"type": "string",
+						"description": "This is a description of a special string property",
+						"minLength": 3
+					},
+					"password": {
+						"type": "string"
+					},
+					"repeatPassword": {
+						"type": "string"
+					},
+					"email": {
+						"$ref": "#/components/schemas/Email"
+					}
+				},
+				"required": [
+					"token",
+					"password",
+					"repeatPassword",
+					"email"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UserLogin": {
+				"properties": {
+					"email": {
+						"$ref": "#/components/schemas/Email"
+					},
+					"password": {
+						"type": "string",
+						"description": "This is a description of a special string property",
+						"example": "password",
+						"minLength": 3,
+						"maxLength": 20
+					}
+				},
+				"required": [
+					"email",
+					"password"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UserLogout": {
+				"properties": {
+					"token": {
+						"type": "string",
+						"description": "This is a description of a special string property",
+						"example": "oi23n4OAIOES234kjdf.ksdbfi34i2bbekbq.asdi23bedsad823bws-_2"
+					}
+				},
+				"required": [
+					"token"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UpdateProfileParams": {
+				"properties": {
+					"username": {
+						"type": "string",
+						"description": "This is a description of a special string property",
+						"example": "Doe",
+						"minLength": 3,
+						"maxLength": 20
+					},
+					"role": {
+						"type": "string",
+						"description": "This is a description of a special string property",
+						"example": "John",
+						"minLength": 3,
+						"maxLength": 20
+					},
+					"company": {
+						"type": "string",
+						"description": "This is a description of a special string property",
+						"example": "John",
+						"minLength": 3,
+						"maxLength": 20
+					}
+				},
+				"required": [
+					"username",
+					"role",
+					"company"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UpdatePasswordParams": {
+				"properties": {
+					"password": {
+						"type": "string",
+						"description": "This is a description of a special string property",
+						"example": 123456,
+						"minLength": 6
+					},
+					"lastPassword": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"password",
+					"lastPassword"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UpdateEmailParams": {
+				"properties": {
+					"token": {
+						"type": "string",
+						"description": "This is a description of a special string property",
+						"minLength": 6,
+						"maxLength": 6
+					},
+					"email": {
+						"$ref": "#/components/schemas/Email",
+						"description": "This is a description of a special string property",
+						"example": 123456
+					}
+				},
+				"required": [
+					"token",
+					"email"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UserCreationParams": {
+				"properties": {
+					"username": {
+						"type": "string",
+						"description": "This is a description of a special string property",
+						"example": "john-doe",
+						"minLength": 4,
+						"maxLength": 20
+					},
+					"role": {
+						"type": "string",
+						"description": "This is a description of a special string property",
+						"example": "john-doe",
+						"minLength": 4,
+						"maxLength": 20
+					},
+					"company": {
+						"type": "string",
+						"description": "This is a description of a special string property",
+						"example": "john-doe",
+						"minLength": 4,
+						"maxLength": 20
+					},
+					"email": {
+						"$ref": "#/components/schemas/Email"
+					},
+					"password": {
+						"type": "string",
+						"description": "This is a description of a special string property",
+						"example": "asde",
+						"minLength": 3,
+						"maxLength": 20
+					}
+				},
+				"required": [
+					"username",
+					"email",
+					"password"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"VerifyCodeParams": {
+				"properties": {
+					"token": {
+						"type": "string",
+						"description": "This is a description of a special string property",
+						"minLength": 6
+					}
+				},
+				"required": [
+					"token"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"VerifyAccount": {
+				"properties": {
+					"token": {
+						"type": "string",
+						"description": "This is a description of a special string property",
+						"example": "oi23n4OAIOES234kjdf.ksdbfi34i2bbekbq.asdi23bedsad823bws-_2"
+					}
+				},
+				"required": [
+					"token"
+				],
+				"type": "object",
+				"additionalProperties": false
+			}
+		},
+		"securitySchemes": {
+			"Bearer": {
+				"type": "apiKey",
+				"name": "token",
+				"in": "header",
+				"scopes": {
+					"root": "can do",
+					"admin": "can do",
+					"user": "can do"
+				}
+			}
+		}
+	},
+	"info": {
+		"title": "darwin",
+		"version": "1.0.0",
+		"license": {
+			"name": "MIT"
+		},
+		"contact": {}
+	},
+	"openapi": "3.0.0",
+	"paths": {
+		"/auth/forgotPassword": {
+			"post": {
+				"operationId": "ForgotPassword",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponse"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Auth"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/forgotPasswordParams"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/auth/resetPassword": {
+			"post": {
+				"operationId": "ResetPassword",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponse"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Auth"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/ResetPasswordParams"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/auth/login": {
+			"post": {
+				"operationId": "Login",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponse"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Auth"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UserLogin"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/auth/logout": {
+			"post": {
+				"operationId": "Logout",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponse"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Auth"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UserLogout"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/auth/profile/update": {
+			"post": {
+				"operationId": "Update",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponse"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Profile"
+				],
+				"security": [
+					{
+						"Bearer": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UpdateProfileParams"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/auth/profile/updatePassword": {
+			"post": {
+				"operationId": "UpdatePassword",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponse"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Profile"
+				],
+				"security": [
+					{
+						"Bearer": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UpdatePasswordParams"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/auth/profile/sendUpdateEmailNotification": {
+			"post": {
+				"operationId": "SendUpdateEmailNotification",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponse"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Profile"
+				],
+				"security": [
+					{
+						"Bearer": []
+					}
+				],
+				"parameters": []
+			}
+		},
+		"/auth/profile/updateEmail": {
+			"post": {
+				"operationId": "Updateemail",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponse"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Profile"
+				],
+				"security": [
+					{
+						"Bearer": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UpdateEmailParams"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/auth/register": {
+			"post": {
+				"operationId": "Register",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponse"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Auth"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UserCreationParams"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/auth/verifyCode": {
+			"post": {
+				"operationId": "VerifyCode",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponse"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Auth"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/VerifyCodeParams"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/auth/verify/token": {
+			"post": {
+				"operationId": "Verify",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponse"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Middleware"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/VerifyAccount"
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "/api"
+		}
+	]
 }
