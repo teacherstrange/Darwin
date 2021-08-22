@@ -1,29 +1,22 @@
-input RegisterInput {
-    username: String!
-    email: String!
-    password: String!
-    role: String
-    occupation: String
-}
-type RegisterResponse {
+type ProjectResponse {
     code: String
     status: String
-    data: String
+    data: Project
     token: String
+    message: String
+}
+input InputProject{
+    name: String!
+    short_url: String!
+    description: String!
 }
 
 type Mutation {
-    register(input: RegisterInput): RegisterResponse!
+    createProject(input: InputProject): ProjectResponse!
 }
 
-type User {
-    email: String!
-    id: Int!
-    username: String
-    role: String
-    company: String
-}
-
-type Query {
-    allUsers: [User!]!
+type Project{
+    name: String!
+    short_url: String!
+    description: String!
 }

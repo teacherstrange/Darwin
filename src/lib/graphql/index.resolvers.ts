@@ -1,12 +1,15 @@
 import {Context} from "../../utils/generic/context";
 import {DateTimeResolver} from "graphql-scalars";
 import authResolvers from "../modules/auth/auth.resolver";
+import projectResolvers from "../modules/project/project.resolver";
 export default {
     Query: {
-        ...authResolvers.query
+        ...authResolvers.query,
+        ...projectResolvers.query
     },
     Mutation: {
         ...authResolvers.mutation,
+        ...projectResolvers.mutation
     }
 }
 
