@@ -9,16 +9,16 @@ import {Project} from '../project.model';
 import {Route, Post, Query, Body, Tags} from "tsoa";
 
 //Import type
-import {UserLogin, UserLogout} from '../types/login.type';
+import {UserLogin, UserLogout} from '../../auth/types/login.type';
 import {Controller} from "../../../../utils/generic/controller";
 
 declare var global: any;
 
-@Tags("Auth")
-@Route('auth')
+@Tags("Project")
+@Route('project')
 export class ProjectController extends Controller {
 
-    @Post('login')
+    @Post('create')
     public async createProject (
         @Body() body: UserLogin
     ) : Promise<IResponse> {
