@@ -26,25 +26,24 @@ export class loginController extends Controller {
             let user : any = await User.findFirst({where: {email: body.email}});
 
             if (!user)
-                return this.liteResponse(global.responseCode.WRONG_USERNAME, null, 'phone or password incorrect');
+                return this.liteResponse(global.responseCode.WRONG_USERNAME, null, 'Email or password incorrect');
             else{
                 //Test du nombre de tentative
-            
+
                 const valid : boolean | null = await bcrypt.compare(body.password, user.password);
 
                 if (!valid){
                     return this.liteResponse(global.responseCode.FAILURE, null, "Invalid credentials .");
                 }else {
                 //Check if user is validated
-                if (user.verified_at){
-                    
-                    if (!user)
-                        return this.liteResponse(global.responseCode.FAILURE, null, "Error occured, can you retry.");
-                    
-                    return this.liteResponse(global.responseCode.success, user.sanitizeData(), 'Connect with success.', await this.generateToken(user._id));
-                }
-                return this.liteResponse(global.responseCode.FAILURE, null, 'Your account is not verify yet.');
-                
+               // if (user.verified_at){
+
+                    if (!user) return this.liteResponse(global.responseCode.FAILURE, null, "Error occured, can you retry.");
+
+                    return this.liteResponse(global.responseCode.success, user.sanitizeData(), 'Connect with success.', await this.generateToken(user));
+               // }
+                // return this.liteResponse(global.responseCode.FAILURE, null, 'Your account is not verify yet.');
+
                 }
             }
         }catch (e) {
@@ -52,13 +51,13 @@ export class loginController extends Controller {
         }
     }
 
- 
+
     //Generate Token
-    public async generateToken (id:string) : Promise<string> {
+    public async generateToken (user:any) : Promise<string> {
         const jwtToken = await JWTToken.create({
             data:{
-                userId: id,
-                token: jwt.sign({id: id}, config.JWT_SECRET, {expiresIn: "24h"}),
+                userId: user.id,
+                token: jwt.sign({user}, config.JWT_SECRET, {expiresIn: "24h"}),
                 expiredAt: new Date((Date.now() + (24*60*60*1000)))
             }
         })

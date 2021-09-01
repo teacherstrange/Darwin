@@ -17,14 +17,12 @@ declare var global: any;
 export const expressAuthentication = async (req: Request, securityName: string, scopes?: string[]) : Promise<any> => {
 
     try {
-        console.log(securityName)
         if (securityName === "Bearer"){
             const token : any = req.body.authorization || req.query.authorization || req.headers["authorization"];
             if (!token)
                 throw new FooError("Token not found");
 
             const decoded: any = jwt.verify(token, config.JWT_SECRET);
-            console.log(decoded)
             if (decoded instanceof (JsonWebTokenError || TokenExpiredError)){
                 throw new FooError("Incorrect token");
             }
@@ -32,7 +30,6 @@ export const expressAuthentication = async (req: Request, securityName: string, 
             if (!decoded){
                 return Promise.reject({});
             } else{
-                const params = scopes ? scopes : [];
                 const user : any = await User.findUnique({ where: { id: decoded.id}});
 
                 if (!user)

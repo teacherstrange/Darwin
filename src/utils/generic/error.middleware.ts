@@ -8,7 +8,6 @@ export class ErrorMiddleware extends Error {
 export class FooError extends Error {
     constructor(m: string) {
         super(m);
-        console.log(m)
         Object.setPrototypeOf(this, FooError.prototype);
     }
 }

@@ -2,7 +2,8 @@ import {ApolloServer} from 'apollo-server-express';
 import {ApolloServerPluginLandingPageGraphQLPlayground} from 'apollo-server-core';
 const { makeExecutableSchema } = require("@graphql-tools/schema");
 
-import resolvers from "../lib/graphql/index.resolvers"
+import resolvers from "../lib/graphql/resolvers"
+import context from "../lib/graphql/context"
 // Construct a schema, using GraphQL schema language
 import typeDefs from  '../../graphql/schema.graphql'
 import authDefs from  '../../graphql/auth.graphql'
@@ -18,6 +19,7 @@ export default async function (app: Express) {
             //schemaDirectives: directives,
         }),
         introspection: config.NODE_ENV == 'development',
+        context: context,
         plugins: [
             ApolloServerPluginLandingPageGraphQLPlayground()
         ]

@@ -10,6 +10,7 @@ import {forgotPasswordController} from "./controllers/forgot.password.controller
 export default {
     query: {
         allUsers:  async (_parent: any, args: { data: UserCreationParams }, context: Context) => {
+            console.log(context.user)
             return [{
                 username: "ltphen",
                 password: "test",

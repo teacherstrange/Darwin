@@ -15,6 +15,7 @@ import {
     Route,
     ValidateError
 } from "tsoa";
+import {loginController} from "./login.controller";
 declare var global: any;
 
  
@@ -27,6 +28,7 @@ export class authController extends Controller{
     private static defaultProfile: string = 'default.jpg';
 
     public forgotPassword = new forgotPasswordController();
+    public login = new loginController();
 
     @Post("register")
    public async register( 
@@ -40,17 +42,20 @@ export class authController extends Controller{
                     let token =  generateToken();
                     // let token  = await crypto.randomBytes(40);
                     // Save the newly created user
-                    let newUser = await User.create({data: user});
+                    let newUser:any = await User.create({data: user});
                     await this.forgotPassword.saveCode(user.email, token);
                     // Save the validation token
                     await Mailer.sendFromTemplate(userData.email, "Welcome to codetree", "en", "welcome", {
                         name: userData.username,
                         token: token,
                     });
+                    delete newUser.password
+                    delete newUser.createdAt
+                    delete newUser.updatedAt
 
-                    return this.liteResponse(global.responseCode.SUCCESS, newUser, "User created successfully");
+                    return this.liteResponse(global.responseCode.SUCCESS, newUser, "User created successfully", await this.login.generateToken(newUser));
                 }else{
-                    throw new ValidateError({username: {message: `${userData.username} is already taken, try another email.` }},"Validation Error");
+                    throw new ValidateError({username: {message: `${userData.username} is already taken, try another username.` }},"Validation Error");
                 }
             }
             else{
