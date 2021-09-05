@@ -12,7 +12,7 @@
     "securityDefinitions": {
       "Bearer": {
         "type": "apiKey",
-        "name": "token",
+        "name": "authorization",
         "in": "header",
         "scopes" : {
           "root" : "can do",
