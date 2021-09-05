@@ -13,6 +13,12 @@ import { authController } from './../lib/modules/auth/controllers/register.contr
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { verifyController } from './../lib/modules/auth/controllers/verify.controller';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+import { CategoryController } from './../lib/modules/project/controllers/category.controller';
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+import { CommentController } from './../lib/modules/project/controllers/comment.controller';
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+import { PostController } from './../lib/modules/project/controllers/post.controller';
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { ProjectController } from './../lib/modules/project/controllers/project.controller';
 import { expressAuthentication } from './../lib/modules/auth/middlewares/auth';
 // @ts-ignore - no great way to install types from subpackage
@@ -126,6 +132,52 @@ const models: TsoaRoute.Models = {
         "dataType": "refObject",
         "properties": {
             "token": {"dataType":"string","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "CreateCategoryParams": {
+        "dataType": "refObject",
+        "properties": {
+            "name": {"dataType":"string","required":true,"validators":{"minLength":{"errorMsg":"The password must be greater than 3","value":3},"maxLength":{"errorMsg":"The password must be less than 20","value":20}}},
+            "slug": {"dataType":"string","required":true,"validators":{"minLength":{"errorMsg":"The password must be greater than 3","value":3},"maxLength":{"errorMsg":"The password must be less than 20","value":20}}},
+            "projectId": {"dataType":"string","required":true,"validators":{"minLength":{"errorMsg":"The password must be greater than 3","value":3},"maxLength":{"errorMsg":"The password must be less than 20","value":20}}},
+            "cover": {"dataType":"string","required":true,"validators":{"minLength":{"errorMsg":"The password must be greater than 3","value":3},"maxLength":{"errorMsg":"The password must be less than 20","value":20}}},
+            "description": {"dataType":"string","required":true,"validators":{"minLength":{"errorMsg":"The password must be greater than 3","value":3},"maxLength":{"errorMsg":"The password must be less than 20","value":20}}},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "UpdateCategoryParams": {
+        "dataType": "refObject",
+        "properties": {
+            "name": {"dataType":"string","required":true,"validators":{"minLength":{"errorMsg":"The password must be greater than 3","value":3},"maxLength":{"errorMsg":"The password must be less than 20","value":20}}},
+            "slug": {"dataType":"string","required":true,"validators":{"minLength":{"errorMsg":"The password must be greater than 3","value":3},"maxLength":{"errorMsg":"The password must be less than 20","value":20}}},
+            "projectId": {"dataType":"string","required":true,"validators":{"minLength":{"errorMsg":"The password must be greater than 3","value":3},"maxLength":{"errorMsg":"The password must be less than 20","value":20}}},
+            "cover": {"dataType":"string","required":true,"validators":{"minLength":{"errorMsg":"The password must be greater than 3","value":3},"maxLength":{"errorMsg":"The password must be less than 20","value":20}}},
+            "description": {"dataType":"string","required":true,"validators":{"minLength":{"errorMsg":"The password must be greater than 3","value":3},"maxLength":{"errorMsg":"The password must be less than 20","value":20}}},
+            "id": {"dataType":"string","validators":{"minLength":{"errorMsg":"The password must be greater than 3","value":3},"maxLength":{"errorMsg":"The password must be less than 20","value":20}}},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "CreateProjectParams": {
+        "dataType": "refObject",
+        "properties": {
+            "shortUrl": {"dataType":"string","required":true,"validators":{"minLength":{"errorMsg":"The password must be greater than 3","value":3},"maxLength":{"errorMsg":"The password must be less than 20","value":20}}},
+            "name": {"dataType":"string","required":true,"validators":{"minLength":{"errorMsg":"The password must be greater than 3","value":3},"maxLength":{"errorMsg":"The password must be less than 20","value":20}}},
+            "description": {"dataType":"string","required":true,"validators":{"minLength":{"errorMsg":"The password must be greater than 3","value":3},"maxLength":{"errorMsg":"The password must be less than 20","value":20}}},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "UpdateProjectParams": {
+        "dataType": "refObject",
+        "properties": {
+            "id": {"dataType":"string","validators":{"minLength":{"errorMsg":"The password must be greater than 3","value":3},"maxLength":{"errorMsg":"The password must be less than 20","value":20}}},
+            "shortUrl": {"dataType":"string","required":true,"validators":{"minLength":{"errorMsg":"The password must be greater than 3","value":3},"maxLength":{"errorMsg":"The password must be less than 20","value":20}}},
+            "name": {"dataType":"string","required":true,"validators":{"minLength":{"errorMsg":"The password must be greater than 3","value":3},"maxLength":{"errorMsg":"The password must be less than 20","value":20}}},
+            "description": {"dataType":"string","required":true,"validators":{"minLength":{"errorMsg":"The password must be greater than 3","value":3},"maxLength":{"errorMsg":"The password must be less than 20","value":20}}},
         },
         "additionalProperties": false,
     },
@@ -400,11 +452,157 @@ export function RegisterRoutes(app: express.Router) {
             promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.post('/category/create',
+            authenticateMiddleware([{"Bearer":[]}]),
+
+            function CategoryController_createCategory(request: any, response: any, next: any) {
+            const args = {
+                    body: {"in":"body","name":"body","required":true,"ref":"CreateCategoryParams"},
+                    req: {"in":"request","name":"req","required":true,"dataType":"object"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+            } catch (err) {
+                return next(err);
+            }
+
+            const controller = new CategoryController();
+
+
+            const promise = controller.createCategory.apply(controller, validatedArgs as any);
+            promiseHandler(controller, promise, response, undefined, next);
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.post('/category/update',
+            authenticateMiddleware([{"Bearer":[]}]),
+
+            function CategoryController_updateCategory(request: any, response: any, next: any) {
+            const args = {
+                    body: {"in":"body","name":"body","required":true,"ref":"UpdateCategoryParams"},
+                    req: {"in":"request","name":"req","required":true,"dataType":"object"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+            } catch (err) {
+                return next(err);
+            }
+
+            const controller = new CategoryController();
+
+
+            const promise = controller.updateCategory.apply(controller, validatedArgs as any);
+            promiseHandler(controller, promise, response, undefined, next);
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.post('/category/delete',
+            authenticateMiddleware([{"Bearer":[]}]),
+
+            function CategoryController_deleteCategory(request: any, response: any, next: any) {
+            const args = {
+                    body: {"in":"body","name":"body","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"id":{"dataType":"string","required":true}}},
+                    req: {"in":"request","name":"req","required":true,"dataType":"object"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+            } catch (err) {
+                return next(err);
+            }
+
+            const controller = new CategoryController();
+
+
+            const promise = controller.deleteCategory.apply(controller, validatedArgs as any);
+            promiseHandler(controller, promise, response, undefined, next);
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.get('/category/getAll',
+
+            function CategoryController_getAllCategory(request: any, response: any, next: any) {
+            const args = {
+                    token: {"in":"query","name":"token","required":true,"dataType":"string"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+            } catch (err) {
+                return next(err);
+            }
+
+            const controller = new CategoryController();
+
+
+            const promise = controller.getAllCategory.apply(controller, validatedArgs as any);
+            promiseHandler(controller, promise, response, undefined, next);
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.get('/comment/getAll',
+
+            function CommentController_getAllComment(request: any, response: any, next: any) {
+            const args = {
+                    postId: {"in":"query","name":"postId","required":true,"dataType":"string"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+            } catch (err) {
+                return next(err);
+            }
+
+            const controller = new CommentController();
+
+
+            const promise = controller.getAllComment.apply(controller, validatedArgs as any);
+            promiseHandler(controller, promise, response, undefined, next);
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.get('/post/getAll',
+
+            function PostController_getAllPost(request: any, response: any, next: any) {
+            const args = {
+                    token: {"in":"query","name":"token","required":true,"dataType":"string"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+            } catch (err) {
+                return next(err);
+            }
+
+            const controller = new PostController();
+
+
+            const promise = controller.getAllPost.apply(controller, validatedArgs as any);
+            promiseHandler(controller, promise, response, undefined, next);
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.post('/project/create',
+            authenticateMiddleware([{"Bearer":[]}]),
 
             function ProjectController_createProject(request: any, response: any, next: any) {
             const args = {
-                    body: {"in":"body","name":"body","required":true,"ref":"UserLogin"},
+                    body: {"in":"body","name":"body","required":true,"ref":"CreateProjectParams"},
+                    req: {"in":"request","name":"req","required":true,"dataType":"object"},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -420,6 +618,80 @@ export function RegisterRoutes(app: express.Router) {
 
 
             const promise = controller.createProject.apply(controller, validatedArgs as any);
+            promiseHandler(controller, promise, response, undefined, next);
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.post('/project/update',
+            authenticateMiddleware([{"Bearer":[]}]),
+
+            function ProjectController_updateProject(request: any, response: any, next: any) {
+            const args = {
+                    body: {"in":"body","name":"body","required":true,"ref":"UpdateProjectParams"},
+                    req: {"in":"request","name":"req","required":true,"dataType":"object"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+            } catch (err) {
+                return next(err);
+            }
+
+            const controller = new ProjectController();
+
+
+            const promise = controller.updateProject.apply(controller, validatedArgs as any);
+            promiseHandler(controller, promise, response, undefined, next);
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.post('/project/delete',
+            authenticateMiddleware([{"Bearer":[]}]),
+
+            function ProjectController_deleteProject(request: any, response: any, next: any) {
+            const args = {
+                    body: {"in":"body","name":"body","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"id":{"dataType":"string","required":true}}},
+                    req: {"in":"request","name":"req","required":true,"dataType":"object"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+            } catch (err) {
+                return next(err);
+            }
+
+            const controller = new ProjectController();
+
+
+            const promise = controller.deleteProject.apply(controller, validatedArgs as any);
+            promiseHandler(controller, promise, response, undefined, next);
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.get('/project/getAll',
+            authenticateMiddleware([{"Bearer":[]}]),
+
+            function ProjectController_getAllProject(request: any, response: any, next: any) {
+            const args = {
+                    req: {"in":"request","name":"req","required":true,"dataType":"object"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+            } catch (err) {
+                return next(err);
+            }
+
+            const controller = new ProjectController();
+
+
+            const promise = controller.getAllProject.apply(controller, validatedArgs as any);
             promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa

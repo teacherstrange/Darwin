@@ -18,26 +18,27 @@ export const expressAuthentication = async (req: Request, securityName: string, 
 
     try {
         if (securityName === "Bearer"){
-            const token : any = req.body.authorization || req.query.authorization || req.headers["authorization"];
+            let token : any = req.body.authorization || req.query.authorization || req.headers["authorization"];
+            token = token.split("Bearer ")[1]
             if (!token)
                 throw new FooError("Token not found");
-
             const decoded: any = jwt.verify(token, config.JWT_SECRET);
             if (decoded instanceof (JsonWebTokenError || TokenExpiredError)){
                 throw new FooError("Incorrect token");
             }
-
             if (!decoded){
                 return Promise.reject({});
             } else{
-                const user : any = await User.findUnique({ where: { id: decoded.id}});
-
+                // const user : any = await User.findUnique({ where: { id: decoded.user.id}});
+                const user : any =  decoded.user;
                 if (!user)
                     throw new FooError("Unknown User");
+                delete decoded.user
                 return Promise.resolve({...decoded, ...user})
             }
         }
     }catch (e) {
+        console.log(e.message);
         return Promise.reject(new FooError(e.m))
     }
 

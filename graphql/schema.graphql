@@ -1,22 +1,5 @@
-type ProjectResponse {
-    code: String
-    status: String
-    data: Project
-    token: String
-    message: String
-}
-input InputProject{
-    name: String!
-    short_url: String!
-    description: String!
+
+input InputDelete{
+    id: String!
 }
 
-type Mutation {
-    createProject(input: InputProject): ProjectResponse!
-}
-
-type Project{
-    name: String!
-    short_url: String!
-    description: String!
-}

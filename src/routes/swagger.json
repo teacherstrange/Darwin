@@ -250,6 +250,180 @@
 				],
 				"type": "object",
 				"additionalProperties": false
+			},
+			"CreateCategoryParams": {
+				"properties": {
+					"name": {
+						"type": "string",
+						"description": "This is a description of a special string property",
+						"example": "password",
+						"minLength": 3,
+						"maxLength": 20
+					},
+					"slug": {
+						"type": "string",
+						"description": "This is a description of a special string property",
+						"example": "password",
+						"minLength": 3,
+						"maxLength": 20
+					},
+					"projectId": {
+						"type": "string",
+						"description": "This is a description of a special string property",
+						"example": "password",
+						"minLength": 3,
+						"maxLength": 20
+					},
+					"cover": {
+						"type": "string",
+						"description": "This is a description of a special string property",
+						"example": "password",
+						"minLength": 3,
+						"maxLength": 20
+					},
+					"description": {
+						"type": "string",
+						"description": "This is a description of a special string property",
+						"example": "password",
+						"minLength": 3,
+						"maxLength": 20
+					}
+				},
+				"required": [
+					"name",
+					"slug",
+					"projectId",
+					"cover",
+					"description"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UpdateCategoryParams": {
+				"properties": {
+					"name": {
+						"type": "string",
+						"description": "This is a description of a special string property",
+						"example": "password",
+						"minLength": 3,
+						"maxLength": 20
+					},
+					"slug": {
+						"type": "string",
+						"description": "This is a description of a special string property",
+						"example": "password",
+						"minLength": 3,
+						"maxLength": 20
+					},
+					"projectId": {
+						"type": "string",
+						"description": "This is a description of a special string property",
+						"example": "password",
+						"minLength": 3,
+						"maxLength": 20
+					},
+					"cover": {
+						"type": "string",
+						"description": "This is a description of a special string property",
+						"example": "password",
+						"minLength": 3,
+						"maxLength": 20
+					},
+					"description": {
+						"type": "string",
+						"description": "This is a description of a special string property",
+						"example": "password",
+						"minLength": 3,
+						"maxLength": 20
+					},
+					"id": {
+						"type": "string",
+						"description": "This is a description of a special string property",
+						"example": "password",
+						"minLength": 3,
+						"maxLength": 20
+					}
+				},
+				"required": [
+					"name",
+					"slug",
+					"projectId",
+					"cover",
+					"description"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CreateProjectParams": {
+				"properties": {
+					"shortUrl": {
+						"type": "string",
+						"description": "This is a description of a special string property",
+						"example": "password",
+						"minLength": 3,
+						"maxLength": 20
+					},
+					"name": {
+						"type": "string",
+						"description": "This is a description of a special string property",
+						"example": "password",
+						"minLength": 3,
+						"maxLength": 20
+					},
+					"description": {
+						"type": "string",
+						"description": "This is a description of a special string property",
+						"example": "password",
+						"minLength": 3,
+						"maxLength": 20
+					}
+				},
+				"required": [
+					"shortUrl",
+					"name",
+					"description"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UpdateProjectParams": {
+				"properties": {
+					"id": {
+						"type": "string",
+						"description": "This is a description of a special string property",
+						"example": "password",
+						"minLength": 3,
+						"maxLength": 20
+					},
+					"shortUrl": {
+						"type": "string",
+						"description": "This is a description of a special string property",
+						"example": "password",
+						"minLength": 3,
+						"maxLength": 20
+					},
+					"name": {
+						"type": "string",
+						"description": "This is a description of a special string property",
+						"example": "password",
+						"minLength": 3,
+						"maxLength": 20
+					},
+					"description": {
+						"type": "string",
+						"description": "This is a description of a special string property",
+						"example": "password",
+						"minLength": 3,
+						"maxLength": 20
+					}
+				},
+				"required": [
+					"shortUrl",
+					"name",
+					"description"
+				],
+				"type": "object",
+				"additionalProperties": false
 			}
 		},
 		"securitySchemes": {
@@ -633,6 +807,215 @@
 				}
 			}
 		},
+		"/category/create": {
+			"post": {
+				"operationId": "CreateCategory",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponse"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Category"
+				],
+				"security": [
+					{
+						"Bearer": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateCategoryParams"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/category/update": {
+			"post": {
+				"operationId": "UpdateCategory",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponse"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Category"
+				],
+				"security": [
+					{
+						"Bearer": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UpdateCategoryParams"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/category/delete": {
+			"post": {
+				"operationId": "DeleteCategory",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponse"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Category"
+				],
+				"security": [
+					{
+						"Bearer": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"id": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"id"
+								],
+								"type": "object"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/category/getAll": {
+			"get": {
+				"operationId": "GetAllCategory",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponse"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Category"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "token",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/comment/getAll": {
+			"get": {
+				"operationId": "GetAllComment",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponse"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Comment"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "postId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/post/getAll": {
+			"get": {
+				"operationId": "GetAllPost",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponse"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Post"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "token",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
 		"/project/create": {
 			"post": {
 				"operationId": "CreateProject",
@@ -651,18 +1034,128 @@
 				"tags": [
 					"Project"
 				],
-				"security": [],
+				"security": [
+					{
+						"Bearer": []
+					}
+				],
 				"parameters": [],
 				"requestBody": {
 					"required": true,
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/UserLogin"
+								"$ref": "#/components/schemas/CreateProjectParams"
 							}
 						}
 					}
 				}
+			}
+		},
+		"/project/update": {
+			"post": {
+				"operationId": "UpdateProject",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponse"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Project"
+				],
+				"security": [
+					{
+						"Bearer": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UpdateProjectParams"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/project/delete": {
+			"post": {
+				"operationId": "DeleteProject",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponse"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Project"
+				],
+				"security": [
+					{
+						"Bearer": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"id": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"id"
+								],
+								"type": "object"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/project/getAll": {
+			"get": {
+				"operationId": "GetAllProject",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponse"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Project"
+				],
+				"security": [
+					{
+						"Bearer": []
+					}
+				],
+				"parameters": []
 			}
 		}
 	},

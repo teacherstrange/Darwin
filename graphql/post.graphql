@@ -1,0 +1,59 @@
+type PostResponse {
+    code: String
+    status: String
+    data: Post
+    token: String
+    message: String
+}
+
+enum State {
+    PUBLISHED
+    DRAFT
+    ARCHIVED
+}
+
+type PostsResponse {
+    code: String
+    status: String
+    data: [Post]
+    message: String
+}
+
+input InputPost{
+    title: String!
+    slug: String!
+    categoryId: String!
+    cover: String
+    state: State
+    content: String
+}
+input InputUpdatePost{
+    id: String!
+    title: String!
+    slug: String!
+    categoryId: String!
+    cover: String
+    state: State
+    content: String
+}
+
+type Mutation {
+    createPost(input: InputPost): PostResponse!
+    updatePost(input: InputUpdatePost): PostResponse!
+    deletePost(input: InputDelete): PostResponse!
+}
+
+type Query{
+    getPosts: PostsResponse!
+}
+
+type Post{
+    id: String
+    title: String!
+    slug: String!
+    category: Category!
+    cover: String
+    state: State
+    content: String
+    comments: [Comment]
+}

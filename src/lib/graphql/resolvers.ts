@@ -1,16 +1,18 @@
 import {Context} from "../../utils/generic/context";
 import {DateTimeResolver} from "graphql-scalars";
 import authResolvers from "../modules/auth/auth.resolver";
-import projectResolvers from "../modules/project/project.resolver";
+import mainResolvers from "../modules/project/main.resolver";
+import {Post} from "../modules/project/main.model";
 export default {
     Query: {
         ...authResolvers.query,
-        ...projectResolvers.query
+        ...mainResolvers.query
     },
     Mutation: {
         ...authResolvers.mutation,
-        ...projectResolvers.mutation
-    }
+        ...mainResolvers.mutation
+    },
+    ...mainResolvers.others
 }
 
 enum SortOrder {

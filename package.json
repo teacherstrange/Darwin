@@ -10,7 +10,7 @@
     "db:migrate": "prisma migrate dev --name init",
     "db:studio": "npx prisma studio",
     "start": "concurrently \"yarn run tsoa:watch\" \"yarn run bundle:watch\" \"yarn run run:watch\"",
-    "start:dev": "concurrently \"yarn run tsoa:watch\" \"yarn run bundle:watch\" \"yarn run run:watch\"",
+    "start:dev": "nodemon --watch \"./**\" --ext \"ts,json\" --ignore \"src/**/*.spec.ts\" --exec \"ts-node src/index.ts\"",
     "dep:check": "node bin/checkDep.js",
     "run": "node build/index.js",
     "run:watch": "nodemon --watch build --delay 2000ms build/index.js",
@@ -44,7 +44,7 @@
     "nodemailer": "^6.6.3",
     "nodemon": "^2.0.12",
     "swagger-ui-express": "^4.1.6",
-    "ts-node": "^10.2.0",
+    "ts-node": "^10.2.1",
     "tsoa": "^3.9.0"
   },
   "devDependencies": {

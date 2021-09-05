@@ -1,14 +1,13 @@
 import { PrismaClient } from '@prisma/client'
+import { Request , Response } from 'express';
 
 const prisma = new PrismaClient()
 
 export interface Context {
     db?: PrismaClient,
-    user: any
+    user: any,
+    req: Request
 }
-export const context: Context = {
-    db: prisma,
-    user: null
-}
+
 
 export const Database = prisma

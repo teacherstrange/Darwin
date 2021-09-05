@@ -1,0 +1,53 @@
+type CategoryResponse {
+    code: String
+    status: String
+    data: Category
+    token: String
+    message: String
+}
+type CategoriesResponse {
+    code: String
+    status: String
+    data: [Category]
+    token: String
+    message: String
+}
+
+input InputCategory{
+    name: String!
+    slug: String!
+    projectId: String!
+    cover: String
+    description: String
+}
+
+input InputUpdateCategory{
+    name: String!
+    slug: String!
+    projectId: String!
+    cover: String
+    description: String
+}
+
+
+type Mutation {
+    createCategory(input: InputCategory): CategoryResponse!
+    updateCategory(input: InputUpdateCategory): CategoryResponse!
+    deleteCategory(input: InputDelete): CategoryResponse!
+}
+
+type Query{
+    getCategories: CategoriesResponse!
+}
+
+type Category{
+    id: String
+    name: String!
+    slug: String!
+    project: Project
+    cover: String
+    description: String
+    posts: [Post]
+}
+
+

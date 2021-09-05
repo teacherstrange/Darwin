@@ -39,8 +39,10 @@ export class loginController extends Controller {
                // if (user.verified_at){
 
                     if (!user) return this.liteResponse(global.responseCode.FAILURE, null, "Error occured, can you retry.");
-
-                    return this.liteResponse(global.responseCode.success, user.sanitizeData(), 'Connect with success.', await this.generateToken(user));
+                    delete user.password
+                    delete user.createdAt
+                    delete user.updatedAt
+                    return this.liteResponse(global.responseCode.SUCCESS, user, 'Connect with success.', await this.generateToken(user));
                // }
                 // return this.liteResponse(global.responseCode.FAILURE, null, 'Your account is not verify yet.');
 

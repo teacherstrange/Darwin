@@ -1,0 +1,45 @@
+type CommentResponse {
+    code: String
+    status: String
+    data: Comment
+    token: String
+    message: String
+}
+
+type CommentsResponse {
+    code: String
+    status: String
+    data: [Comment]
+    message: String
+}
+
+input InputComment{
+    name: String!
+    message: String!
+    postId: String!
+    email: String!
+}
+input InputUpdateComment{
+    id: String!
+    name: String!
+    message: String!
+}
+
+type Mutation {
+    createComment(input: InputComment): CommentResponse!
+    updateComment(input: InputUpdateComment): CommentResponse!
+    deleteComment(input: InputDelete): CommentResponse!
+}
+
+type Query{
+    getComments: CommentsResponse!
+}
+
+
+type Comment{
+    id: String
+    name: String!
+    message: String!
+    post: Post!
+    email: String!
+}

@@ -1,0 +1,44 @@
+type ProjectResponse {
+    code: String
+    status: String
+    data: Project
+    token: String
+    message: String
+}
+
+type ProjectsResponse {
+    code: String
+    status: String
+    data: [Project]
+    message: String
+}
+
+input InputProject{
+    name: String!
+    shortUrl: String!
+    description: String!
+}
+input InputUpdateProject{
+    id: String!
+    name: String!
+    shortUrl: String!
+    description: String!
+}
+
+type Mutation {
+    createProject(input: InputProject): ProjectResponse!
+    updateProject(input: InputUpdateProject): ProjectResponse!
+    deleteProject(input: InputDelete): ProjectResponse!
+}
+
+type Query{
+    getProjects: ProjectsResponse!
+}
+
+type Project{
+    id: String
+    name: String!
+    shortUrl: String!
+    description: String!
+    categories: [Category]
+}
