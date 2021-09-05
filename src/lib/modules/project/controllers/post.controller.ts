@@ -5,8 +5,8 @@ import jwt, {JsonWebTokenError} from 'jsonwebtoken';
 import config from '../../../../config/config';
 
 import {IResponse} from '../../../../types/response.type';
-import {Category, Post, Project} from '../main.model';
-import {Route, Post as P, Request, Body, Tags, Security, Get, Query} from "tsoa";
+import {Category, Post as PostModel, Project} from '../main.model';
+import {Route, Post, Request, Body, Tags, Security, Get, Query} from "tsoa";
 
 //Import type
 import {UserLogin, UserLogout} from '../../auth/types/login.type';
@@ -20,7 +20,7 @@ declare var global: any;
 export class PostController extends Controller {
 
     @Security('Bearer')
-    @P('create')
+    @Post('create')
     public async createPost (
         @Body() body: CreatePostParams,
         @Request() req : any
@@ -28,7 +28,7 @@ export class PostController extends Controller {
         try {
             let category = await Category.findFirst({where: { id: body.categoryId, project: {userId: req.user.id}}})
             if(category) {
-                let post = await Post.create({ data: { ...body } })
+                let post = await PostModel.create({ data: { ...body } })
                 if(post)
                     return this.liteResponse(global.responseCode.SUCCESS, post, "Post created successfully");
                 return this.liteResponse(global.responseCode.NOT_EXISTS, null, 'The post does not exist !');
@@ -43,7 +43,7 @@ export class PostController extends Controller {
     }
 
     @Security('Bearer')
-    @P('update')
+    @Post('update')
     public async updatePost (
         @Body() body: UpdatePostParams,
         @Request() req : any
@@ -52,10 +52,10 @@ export class PostController extends Controller {
 
             let id = body.id
             delete body.id
-            let post = await Post.findFirst({ where: {id: id, category: {project: {userId: req.user.id}}}})
+            let post = await PostModel.findFirst({ where: {id: id, category: {project: {userId: req.user.id}}}})
             if(!post)
                 return this.liteResponse(global.responseCode.NOT_EXISTS, null, 'The post does not exist !');
-            post = await Post.update({ data: { ...body }, where: {id: id}})
+            post = await PostModel.update({ data: { ...body }, where: {id: id}})
             if(post)
                 return this.liteResponse(global.responseCode.SUCCESS, post, "Post updated successfully");
             return this.liteResponse(global.responseCode.NOT_EXISTS, null, 'The post does not exist !');
@@ -68,7 +68,7 @@ export class PostController extends Controller {
     }
 
     @Security('Bearer')
-    @P('delete')
+    @Post('delete')
     public async deletePost (
         @Body() body: { id: string },
         @Request() req : any
@@ -76,11 +76,11 @@ export class PostController extends Controller {
         try {
 
             let id = body.id
-            let post = await Post.findFirst({ where: {id: id, category: {project: {userId: req.user.id}}}})
+            let post = await PostModel.findFirst({ where: {id: id, category: {project: {userId: req.user.id}}}})
             if(!post)
                 return this.liteResponse(global.responseCode.NOT_EXISTS, null, 'The post does not exist !');
 
-            post = await Post.delete({ where: { id: body.id } })
+            post = await PostModel.delete({ where: { id: body.id } })
             if(post)
                 return this.liteResponse(global.responseCode.SUCCESS, post, "Post deleted successfully");
             return this.liteResponse(global.responseCode.NOT_EXISTS, null, 'The post does not exist !');
@@ -96,7 +96,7 @@ export class PostController extends Controller {
     ) : Promise<IResponse> {
         try {
 
-            let posts = await Post.findMany({ where: { category : { project: { id: token }}}})
+            let posts = await PostModel.findMany({ where: { category : { project: { id: token }}}})
             if(posts)
                 return this.liteResponse(global.responseCode.SUCCESS, posts, "All posts");
             return this.liteResponse(global.responseCode.NOT_EXISTS, null, 'The post does not exist !');

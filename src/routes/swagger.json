@@ -354,6 +354,198 @@
 				"type": "object",
 				"additionalProperties": false
 			},
+			"CreateCommentParams": {
+				"properties": {
+					"name": {
+						"type": "string",
+						"description": "This is a description of a special string property",
+						"example": "password",
+						"minLength": 3,
+						"maxLength": 20
+					},
+					"email": {
+						"type": "string",
+						"description": "This is a description of a special string property",
+						"example": "password",
+						"minLength": 3,
+						"maxLength": 20
+					},
+					"postId": {
+						"type": "string",
+						"description": "This is a description of a special string property",
+						"example": "password",
+						"minLength": 3,
+						"maxLength": 20
+					},
+					"message": {
+						"type": "string",
+						"description": "This is a description of a special string property",
+						"example": "password",
+						"minLength": 3,
+						"maxLength": 20
+					}
+				},
+				"required": [
+					"name",
+					"email",
+					"postId",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UpdateCommentParams": {
+				"properties": {
+					"id": {
+						"type": "string",
+						"description": "This is a description of a special string property",
+						"example": "password",
+						"minLength": 3,
+						"maxLength": 20
+					},
+					"message": {
+						"type": "string",
+						"description": "This is a description of a special string property",
+						"example": "password",
+						"minLength": 3,
+						"maxLength": 20
+					}
+				},
+				"required": [
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CreatePostParams": {
+				"properties": {
+					"title": {
+						"type": "string",
+						"description": "This is a description of a special string property",
+						"example": "password",
+						"minLength": 3,
+						"maxLength": 20
+					},
+					"slug": {
+						"type": "string",
+						"description": "This is a description of a special string property",
+						"example": "password",
+						"minLength": 3,
+						"maxLength": 20
+					},
+					"categoryId": {
+						"type": "string",
+						"description": "This is a description of a special string property",
+						"example": "password",
+						"minLength": 3,
+						"maxLength": 20
+					},
+					"cover": {
+						"type": "string",
+						"description": "This is a description of a special string property",
+						"example": "password",
+						"minLength": 3,
+						"maxLength": 20
+					},
+					"content": {
+						"type": "string",
+						"description": "This is a description of a special string property",
+						"example": "password",
+						"minLength": 3,
+						"maxLength": 20
+					},
+					"state": {
+						"type": "string",
+						"enum": [
+							"DRAFT",
+							"PUBLISHED",
+							"ARCHIVED"
+						],
+						"description": "This is a description of a special string property",
+						"example": "password",
+						"minLength": 3,
+						"maxLength": 20
+					}
+				},
+				"required": [
+					"title",
+					"slug",
+					"categoryId",
+					"cover",
+					"content",
+					"state"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UpdatePostParams": {
+				"properties": {
+					"title": {
+						"type": "string",
+						"description": "This is a description of a special string property",
+						"example": "password",
+						"minLength": 3,
+						"maxLength": 20
+					},
+					"slug": {
+						"type": "string",
+						"description": "This is a description of a special string property",
+						"example": "password",
+						"minLength": 3,
+						"maxLength": 20
+					},
+					"categoryId": {
+						"type": "string",
+						"description": "This is a description of a special string property",
+						"example": "password",
+						"minLength": 3,
+						"maxLength": 20
+					},
+					"cover": {
+						"type": "string",
+						"description": "This is a description of a special string property",
+						"example": "password",
+						"minLength": 3,
+						"maxLength": 20
+					},
+					"content": {
+						"type": "string",
+						"description": "This is a description of a special string property",
+						"example": "password",
+						"minLength": 3,
+						"maxLength": 20
+					},
+					"state": {
+						"type": "string",
+						"enum": [
+							"DRAFT",
+							"PUBLISHED",
+							"ARCHIVED"
+						],
+						"description": "This is a description of a special string property",
+						"example": "password",
+						"minLength": 3,
+						"maxLength": 20
+					},
+					"id": {
+						"type": "string",
+						"description": "This is a description of a special string property",
+						"example": "password",
+						"minLength": 3,
+						"maxLength": 20
+					}
+				},
+				"required": [
+					"title",
+					"slug",
+					"categoryId",
+					"cover",
+					"content",
+					"state"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"CreateProjectParams": {
 				"properties": {
 					"shortUrl": {
@@ -954,6 +1146,122 @@
 				]
 			}
 		},
+		"/comment/create": {
+			"post": {
+				"operationId": "CreateComment",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponse"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Comment"
+				],
+				"security": [
+					{
+						"Bearer": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateCommentParams"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/comment/update": {
+			"post": {
+				"operationId": "UpdateComment",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponse"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Comment"
+				],
+				"security": [
+					{
+						"Bearer": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UpdateCommentParams"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/comment/delete": {
+			"post": {
+				"operationId": "DeleteComment",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponse"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Comment"
+				],
+				"security": [
+					{
+						"Bearer": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"id": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"id"
+								],
+								"type": "object"
+							}
+						}
+					}
+				}
+			}
+		},
 		"/comment/getAll": {
 			"get": {
 				"operationId": "GetAllComment",
@@ -983,6 +1291,122 @@
 						}
 					}
 				]
+			}
+		},
+		"/post/create": {
+			"post": {
+				"operationId": "CreatePost",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponse"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Post"
+				],
+				"security": [
+					{
+						"Bearer": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreatePostParams"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/post/update": {
+			"post": {
+				"operationId": "UpdatePost",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponse"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Post"
+				],
+				"security": [
+					{
+						"Bearer": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UpdatePostParams"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/post/delete": {
+			"post": {
+				"operationId": "DeletePost",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponse"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Post"
+				],
+				"security": [
+					{
+						"Bearer": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"id": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"id"
+								],
+								"type": "object"
+							}
+						}
+					}
+				}
 			}
 		},
 		"/post/getAll": {

@@ -5,8 +5,8 @@ import jwt, {JsonWebTokenError} from 'jsonwebtoken';
 import config from '../../../../config/config';
 
 import {IResponse} from '../../../../types/response.type';
-import {Comment, Post, Project} from '../main.model';
-import {Route, Post as P, Request, Body, Tags, Security, Get, Query} from "tsoa";
+import {Comment, Post as PostModel, Project} from '../main.model';
+import {Route, Post, Request, Body, Tags, Security, Get, Query} from "tsoa";
 
 //Import type
 import {UserLogin, UserLogout} from '../../auth/types/login.type';
@@ -20,12 +20,12 @@ declare var global: any;
 export class CommentController extends Controller {
 
     @Security('Bearer')
-    @P('create')
+    @Post('create')
     public async createComment (
         @Body() body: CreateCommentParams,
     ) : Promise<IResponse> {
         try {
-            let post = await Post.findFirst({where: { id: body.postId}})
+            let post = await PostModel.findFirst({where: { id: body.postId}})
             if(post) {
                 let comment = await Comment.create({ data: { ...body } })
                 if(comment)
@@ -42,7 +42,7 @@ export class CommentController extends Controller {
     }
 
     @Security('Bearer')
-    @P('update')
+    @Post('update')
     public async updateComment (
         @Body() body: UpdateCommentParams,
         @Request() req : any
@@ -65,7 +65,7 @@ export class CommentController extends Controller {
     }
 
     @Security('Bearer')
-    @P('delete')
+    @Post('delete')
     public async deleteComment (
         @Body() body: { id: string },
         @Request() req : any
@@ -93,7 +93,7 @@ export class CommentController extends Controller {
         @Query() postId: string ,
     ) : Promise<IResponse> {
         try {
-            let post = await Post.findFirst({where: { id: postId }})
+            let post = await PostModel.findFirst({where: { id: postId }})
             if(post) {
                 let comments = await Comment.findMany({ where: { postId: post.id } })
                 if(comments)
