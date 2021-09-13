@@ -7,13 +7,14 @@ import {Category, Comment, Post} from "../main.model";
 
 export default {
     query: {
-        getPosts:  async (_parent: any, args: { data: { token: string } }, context: Context) => {
+        getPosts:  async (_parent: any, args: {  token: string }, context: Context) => {
             context = await retrieveToken(context);
-            return await (new PostController()).getAllPost(args.data.token);
+            console.log(args)
+            return await (new PostController()).getAllPost(args.token);
         },
-        getPostsByCategory:  async (_parent: any, args: { data: { token: string, categoryIdOrSlug: string } }, context: Context) => {
+        getPostsByCategory:  async (_parent: any, args: {  token: string, categoryIdOrSlug: string }, context: Context) => {
             context = await retrieveToken(context);
-            return await (new PostController()).getAllPostByCategory(args.data.token, args.data.categoryIdOrSlug);
+            return await (new PostController()).getAllPostByCategory(args.token, args.categoryIdOrSlug);
         },
     },
     mutation: {

@@ -7,9 +7,9 @@ import {Post, Project} from "../main.model";
 
 export default {
     query: {
-        getComments:  async (_parent: any, args: { data: { postId: string } }, context: Context) => {
+        getComments:  async (_parent: any, args: {  postId: string  }, context: Context) => {
             context = await retrieveToken(context);
-            return await (new CommentController()).getAllComment(args.data.postId);
+            return await (new CommentController()).getAllComment(args.postId);
         },
     },
     mutation: {

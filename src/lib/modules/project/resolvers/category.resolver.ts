@@ -7,9 +7,9 @@ import {Post, Project} from "../main.model";
 
 export default {
     query: {
-        getCategories:  async (_parent: any, args: { data: { token: string } }, context: Context) => {
+        getCategories:  async (_parent: any, args: {  token: string  }, context: Context) => {
             context = await retrieveToken(context);
-            return await (new CategoryController()).getAllCategory(args.data.token);
+            return await (new CategoryController()).getAllCategory(args.token);
         },
     },
     mutation: {
