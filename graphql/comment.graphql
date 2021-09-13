@@ -32,7 +32,7 @@ type Mutation {
 }
 
 type Query{
-    getComments: CommentsResponse!
+    getComments(postId: String): CommentsResponse!
 }
 
 

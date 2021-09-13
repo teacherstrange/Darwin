@@ -44,7 +44,8 @@ type Mutation {
 }
 
 type Query{
-    getPosts: PostsResponse!
+    getPosts(token: String): PostsResponse!
+    getPostsByCategory(token: String, categoryIdOrSlug: String): PostsResponse!
 }
 
 type Post{

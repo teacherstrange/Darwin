@@ -106,5 +106,41 @@ export class PostController extends Controller {
         }
     }
 
+    @Get('getPostByCategory')
+    public async getAllPostByCategory (
+        @Query() token: string ,
+        @Query() categoryIdOrSlug: string ,
+    ) : Promise<IResponse> {
+        try {
+            let posts = await PostModel.findMany({
+                where: {
+                    AND:{
+                        category: {
+                            project: { id: token }
+                        },
+                    },
+                    OR: [
+                        {
+                            category: {
+                                slug: categoryIdOrSlug,
+                            },
+                        },
+                        {
+                            category: {
+                                id: categoryIdOrSlug,
+                            },
+                        }
+                    ]
+                }
+            })
+            if(posts)
+                return this.liteResponse(global.responseCode.SUCCESS, posts, "All posts");
+            return this.liteResponse(global.responseCode.NOT_EXISTS, null, 'The post does not exist !');
+        }catch (e: any) {
+            throw  e;
+            return this.liteResponse(global.responseCode.EXCEPTION, null, e.message);
+        }
+    }
+
 
 }

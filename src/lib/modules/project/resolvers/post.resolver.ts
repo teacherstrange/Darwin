@@ -11,6 +11,10 @@ export default {
             context = await retrieveToken(context);
             return await (new PostController()).getAllPost(args.data.token);
         },
+        getPostsByCategory:  async (_parent: any, args: { data: { token: string, categoryIdOrSlug: string } }, context: Context) => {
+            context = await retrieveToken(context);
+            return await (new PostController()).getAllPostByCategory(args.data.token, args.data.categoryIdOrSlug);
+        },
     },
     mutation: {
         createPost: async (_parent: any, args: { input: CreatePostParams }, context: Context) => {
