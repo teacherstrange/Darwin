@@ -5,6 +5,7 @@ import {loginController} from "./controllers/login.controller";
 import {UserLogout} from "./types/login.type";
 import {forgotPasswordParams, ResetPasswordParams} from "./types/forgot.password.type";
 import {forgotPasswordController} from "./controllers/forgot.password.controller";
+import {retrieveToken} from "../shared/utils";
 
 
 export default {
@@ -30,8 +31,13 @@ export default {
         login: async (_parent: any, args: { input: UserCreationParams }, context: Context) => {
             return await (new loginController()).login(args.input);
         },
-        logout: async (_parent: any, args: { input: UserLogout }, context: Context) => {
-            return await (new loginController()).logout(args.input);
+        logout: async (_parent: any, args: any, context: Context) => {
+            context = await retrieveToken(context);
+            return await (new loginController()).logout(context);
+        },
+        me: async (_parent: any, args: any, context: Context) => {
+            context = await retrieveToken(context);
+            return await (new loginController()).me(context);
         },
         forgotPassword: async (_parent: any, args: { input: forgotPasswordParams }, context: Context) => {
             return await (new forgotPasswordController()).forgotPassword(args.input);

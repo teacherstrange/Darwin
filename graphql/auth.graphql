@@ -43,7 +43,8 @@ input ResetPasswordInput{
 type Mutation {
   register(input: RegisterInput): AuthResponse!
   login(input: LoginInput): AuthResponse!
-  logout(input: TokenInput): SimpleResponse!
+  logout: SimpleResponse!
+  me: AuthResponse!
   forgotPassword(input: ForgotPasswordInput): SimpleResponse!
   resetPassword(input: ResetPasswordInput): SimpleResponse!
   verifyCode(input: TokenInput): SimpleResponse!

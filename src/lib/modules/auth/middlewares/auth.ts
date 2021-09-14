@@ -33,6 +33,8 @@ export const expressAuthentication = async (req: Request, securityName: string, 
                 const user : any =  decoded.user;
                 if (!user)
                     throw new FooError("Unknown User");
+                decoded.user.token = token;
+
                 delete decoded.user
                 return Promise.resolve({...decoded, ...user})
             }

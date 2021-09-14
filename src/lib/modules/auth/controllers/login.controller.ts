@@ -6,7 +6,7 @@ import config from '../../../../config/config';
 
 import {IResponse} from '../../../../types/response.type';
 import {User, JWTToken} from '../auth.model';
-import {Route, Post, Query, Body, Tags} from "tsoa";
+import {Route, Post, Query, Body, Tags, Request} from "tsoa";
 
 //Import type
 import {UserLogin, UserLogout} from '../types/login.type';
@@ -53,6 +53,27 @@ export class loginController extends Controller {
         }
     }
 
+    @Post('me')
+    public async me (
+        @Request() req : any
+    ) : Promise<IResponse> {
+        try{
+            console.log(req.user)
+            let user: any = await User.findUnique({where: {id: req.user.id}});
+            console.log(user)
+            if (!user)
+                return this.liteResponse(global.responseCode.INVALID_TOKEN, null, 'unknown user');
+            delete user.password
+            delete user.createdAt
+            delete user.updatedAt
+            return this.liteResponse(global.responseCode.SUCCESS, user, 'User data.');
+        }catch (e){
+            return this.liteResponse(global.responseCode.EXCEPTION, null, e.message);
+        }
+
+
+    }
+
 
     //Generate Token
     public async generateToken (user:any) : Promise<string> {
@@ -71,14 +92,14 @@ export class loginController extends Controller {
 
     @Post('logout')
     public async logout(
-        @Body() body: UserLogout
+        @Request() req : any
     ): Promise<IResponse> {
         try{
-            let jwtToken: any = await JWTToken.findFirst({where: {token: body.token}});
+            let jwtToken: any = await JWTToken.findFirst({where: {token: req.user.token}});
             if (!jwtToken)
                 return this.liteResponse(global.responseCode.INVALID_TOKEN, null, 'unknown token');
 
-            await JWTToken.update({where:{token: body.token}, data: {used: false, destroyed: true}});
+            await JWTToken.update({where:{token: req.user.token}, data: {used: false, destroyed: true}});
             return this.liteResponse(global.responseCode.SUCCESS, null, 'User disconnect with success.');
         }catch (e){
             return this.liteResponse(global.responseCode.EXCEPTION, null, e.message);
