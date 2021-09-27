@@ -16,16 +16,14 @@ type ProjectsResponse {
 input InputProject{
     name: String!
     shortUrl: String!
-    description: String!
-    type: String
+    type: ProjectType
     private: Boolean
 }
 input InputUpdateProject{
     id: String!
     name: String!
     shortUrl: String!
-    description: String!
-    type: String
+    type: ProjectType
     private: Boolean
 }
 
@@ -39,12 +37,19 @@ type Query{
     getProjects: ProjectsResponse!
 }
 
+enum ProjectType {
+    BLOG
+    ECOMMERCE
+    SITE
+    OTHER
+}
+
+
 type Project{
     id: String
     name: String!
     shortUrl: String!
-    description: String!
-    type: String
+    type: ProjectType
     private: Boolean
     categories: [Category]
 }
