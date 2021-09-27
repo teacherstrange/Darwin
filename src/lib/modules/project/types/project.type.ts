@@ -31,7 +31,7 @@ export interface CreateProjectParams{
      *
      * @example "BLOG"
      */
-    type: string,
+    type: "OTHER" | "SITE" | "BLOG" | "ECOMMERCE",
 
     /**
      * Example : BLOG, SITE, OTHER, ECOMMERCE
@@ -82,7 +82,7 @@ export interface UpdateProjectParams{
      *
      * @example "BLOG"
      */
-    type: string,
+    type: "OTHER" | "SITE" | "BLOG" | "ECOMMERCE"|null,
 
     /**
      * Example : BLOG, SITE, OTHER, ECOMMERCE

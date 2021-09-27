@@ -554,12 +554,30 @@
 						"example": "password",
 						"minLength": 3,
 						"maxLength": 20
+					},
+					"type": {
+						"type": "string",
+						"enum": [
+							"OTHER",
+							"SITE",
+							"BLOG",
+							"ECOMMERCE"
+						],
+						"description": "Example : BLOG, SITE, OTHER, ECOMMERCE",
+						"example": "BLOG"
+					},
+					"private": {
+						"type": "boolean",
+						"description": "Example : BLOG, SITE, OTHER, ECOMMERCE",
+						"example": 0
 					}
 				},
 				"required": [
 					"shortUrl",
 					"name",
-					"description"
+					"description",
+					"type",
+					"private"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -593,12 +611,31 @@
 						"example": "password",
 						"minLength": 3,
 						"maxLength": 20
+					},
+					"type": {
+						"type": "string",
+						"enum": [
+							"OTHER",
+							"SITE",
+							"BLOG",
+							"ECOMMERCE"
+						],
+						"nullable": true,
+						"description": "Example : BLOG, SITE, OTHER, ECOMMERCE",
+						"example": "BLOG"
+					},
+					"private": {
+						"type": "boolean",
+						"description": "Example : BLOG, SITE, OTHER, ECOMMERCE",
+						"example": 0
 					}
 				},
 				"required": [
 					"shortUrl",
 					"name",
-					"description"
+					"description",
+					"type",
+					"private"
 				],
 				"type": "object",
 				"additionalProperties": false
