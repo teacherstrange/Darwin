@@ -40,13 +40,20 @@ model ForgetPassword {
   updatedAt  DateTime @updatedAt
   expiredAt DateTime
 }
+enum ProjectType {
+  BLOG
+  ECOMMERCE
+  SITE
+  OTHER
+}
 
 model Project {
   id        String     @id @default(uuid())
   shortUrl   String     @unique
   name        String
   userId      String
-  description String?
+  type ProjectType? @default(BLOG)
+  private     Boolean @default(false)
   categories  Category[]
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt

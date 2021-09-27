@@ -26,6 +26,19 @@ export interface CreateProjectParams{
      */
     description: string,
 
+    /**
+     * Example : BLOG, SITE, OTHER, ECOMMERCE
+     *
+     * @example "BLOG"
+     */
+    type: string,
+
+    /**
+     * Example : BLOG, SITE, OTHER, ECOMMERCE
+     *
+     * @example 0
+     */
+    private: boolean,
 }
 
 export interface UpdateProjectParams{
@@ -63,6 +76,20 @@ export interface UpdateProjectParams{
      * @maxLength 20 The password must be less than 20
      */
     description: string,
+
+    /**
+     * Example : BLOG, SITE, OTHER, ECOMMERCE
+     *
+     * @example "BLOG"
+     */
+    type: string,
+
+    /**
+     * Example : BLOG, SITE, OTHER, ECOMMERCE
+     *
+     * @example 0
+     */
+    private: boolean,
 
 }
 

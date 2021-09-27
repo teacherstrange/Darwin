@@ -26,6 +26,9 @@ export class ProjectController extends Controller {
         @Request() req : any
     ) : Promise<IResponse> {
         try {
+            if(["BLOG", "ECOMMERCE", "SITE", "OTHER"].indexOf(body.type) == -1) {
+                return this.liteResponse(global.responseCode.VALIDATION_ERROR, null, 'Please provide an existing project type!');
+            }
             let project = await Project.create({ data: { ...body, userId: req.user.id } })
             if(project)
                 return this.liteResponse(global.responseCode.SUCCESS, project, "Project created successfully");

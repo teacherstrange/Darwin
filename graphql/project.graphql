@@ -17,12 +17,16 @@ input InputProject{
     name: String!
     shortUrl: String!
     description: String!
+    type: String
+    private: Boolean
 }
 input InputUpdateProject{
     id: String!
     name: String!
     shortUrl: String!
     description: String!
+    type: String
+    private: Boolean
 }
 
 type Mutation {
@@ -40,5 +44,7 @@ type Project{
     name: String!
     shortUrl: String!
     description: String!
+    type: String
+    private: Boolean
     categories: [Category]
 }
